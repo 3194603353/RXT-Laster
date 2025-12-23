@@ -1,0 +1,48 @@
+name: Deploy Frontend
+
+on:
+  push:
+    branches:
+      - main  # 监听main分支的push事件
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest  # 使用Ubuntu最新版本作为运行环境
+    
+    steps:
+      # 1. 检出代码
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 检出所有历史记录，确保完整
+      
+      # 2. 设置Node.js环境
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.0'  # 使用项目要求的Node.js版本
+          cache: 'npm'  # 缓存npm依赖，加快构建速度
+      
+      # 3. 安装依赖
+      - name: Install dependencies
+        run: npm install
+      
+      # 4. 运行构建命令
+      - name: Build project
+        run: npm run build
+      
+      # 5. 部署到GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # 使用GitHub自动生成的token
+          publish_dir: ./dist  # 构建输出目录
+          publish_branch: gh-pages  # 部署到gh-pages分支
+          force_orphan: true  # 强制创建孤立分支，避免历史记录问题
+          user_name: 'github-actions[bot]'  # 提交用户名
+          user_email: 'github-actions[bot]@users.noreply.github.com'  # 提交邮箱
+      
+      # 6. 输出部署信息
+      - name: Output deployment URL
+        run: echo "部署完成！访问地址: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"

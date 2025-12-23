@@ -1,0 +1,36 @@
+@import './base.css';
+
+#app {
+  /* make app fill full width so pages can use full viewport */
+  width: 100%;
+  margin: 0;
+  padding: 2rem;
+  box-sizing: border-box;
+  font-weight: normal;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+  padding: 3px;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+@media (min-width: 1024px) {
+  /* keep normal flow on large screens; don't center body so content can start from top-left */
+  body {
+    display: block;
+  }
+
+  #app {
+    display: block;
+    padding: 0 2rem;
+  }
+}
