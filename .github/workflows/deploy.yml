@@ -31,6 +31,10 @@ jobs:
       # 4. 运行构建命令
       - name: Build project
         run: npm run build
+
+      # 解决 History 路由模式在 GitHub Pages 刷新 404 的问题
+      - name: Copy index.html to 404.html
+        run: cp dist/index.html dist/404.html
       
       # 5. 部署到GitHub Pages
       - name: Deploy to GitHub Pages
