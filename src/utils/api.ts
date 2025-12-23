@@ -6,7 +6,7 @@ axios.defaults.baseURL = base
 axios.defaults.withCredentials = true
 // 创建 Axios 实例（统一配置基础路径、超时等）
 const service = axios.create({
-  baseURL: 'http://localhost:8082', // 关键：指向后端服务地址
+  baseURL: 'http://101.37.83.215:8082', // 关键：指向后端服务地址
   timeout: 5000,
 });
 export default axios

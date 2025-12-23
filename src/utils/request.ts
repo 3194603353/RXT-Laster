@@ -4,7 +4,8 @@ import { ElMessage } from 'element-plus'; // 导入Element Plus提示组件（�
 
 // 1. 创建axios实例（核心配置，未修改）
 const service = axios.create({
-  baseURL: 'http://localhost:8082', // 后端地址+端口（必须正确，否则请求发不出去）
+  // 生产环境使用公网地址，开发环境使用本地代理或公网地址
+  baseURL: import.meta.env.PROD ? 'http://101.37.83.215:8082' : '/api',
   timeout: 5000, // 超时时间
   headers: {
     'Content-Type': 'application/json'
