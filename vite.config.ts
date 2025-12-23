@@ -25,7 +25,7 @@ export default defineConfig({
       }
     }
   },
-  base: process.env.NODE_ENV === 'production' ? '/<repository-name>/' : '/',
+  base: process.env.NODE_ENV === 'production' ? '/<RXT-Laster>/' : '/',
   build: {
     outDir: 'dist'
   }
